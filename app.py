@@ -11,16 +11,12 @@ import pandas as pd
 from itertools import combinations
 from collections import defaultdict
 
-# Load dataset
 df = pd.read_csv("groceries.csv")
 
-# Use the actual column name from your dataset
-product_col = "itemDescription"  # Change this to match your file
+product_col = "itemDescription"  
 
-# Clean product names
 df[product_col] = df[product_col].str.lower().str.strip()
 
-# Build co-occurrence dictionary
 co_occurrence = defaultdict(int)
 for _, group in df.groupby('Member_number'):  # Or TransactionID if available
     items = list(group[product_col].unique())
@@ -28,21 +24,17 @@ for _, group in df.groupby('Member_number'):  # Or TransactionID if available
         co_occurrence[(item1, item2)] += 1
         co_occurrence[(item2, item1)] += 1  # symmetric
 
-# Recommendation function
 def recommend(product, top_n=3):
     product = product.lower().strip()
     related_items = [(item2, count) for (item1, item2), count in co_occurrence.items() if item1 == product]
     related_items.sort(key=lambda x: x[1], reverse=True)
     return [item for item, _ in related_items[:top_n]]
 
-# Show available products
 available_products = sorted(df[product_col].unique())
 print("Available products:", ", ".join(available_products[:30]), "...")  # show first 30 only
 
-# Take user input
 user_product = input("\nEnter the product you bought: ")
 
-# Get recommendations
 recommendations = recommend(user_product, top_n=3)
 
 if recommendations:
