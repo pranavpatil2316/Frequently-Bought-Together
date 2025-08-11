@@ -1,5 +1,3 @@
-# Frequently-Bought-Together
-```markdown
 # Frequently Bought Together Recommendation System
 
 A simple **Item-Based Collaborative Filtering** project that suggests items often bought together, similar to Amazon's "Frequently Bought Together" feature.
@@ -7,17 +5,6 @@ A simple **Item-Based Collaborative Filtering** project that suggests items ofte
 ## Dataset
 We use the [Groceries Dataset](https://www.kaggle.com/datasets/heeraldedhia/groceries-dataset) from Kaggle.
 Download `groceries.csv` and place it in the project folder.
-
-## Project Structure
-```
-
-frequently\_bought\_together/
-│
-├── app.py                # Main Python code
-├── groceries.csv         # Dataset (download from Kaggle)
-└── README.md              # Documentation
-
-````
 
 ## Installation
 1. Clone this repository:
